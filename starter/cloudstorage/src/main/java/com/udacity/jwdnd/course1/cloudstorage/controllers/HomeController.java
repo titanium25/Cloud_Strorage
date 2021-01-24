@@ -30,10 +30,10 @@ public class HomeController {
     @GetMapping("/home")
     public String getHomePage(Authentication authentication, Model model) {
         User user = userService.getUser(authentication.getName());
-        Integer userid = user.getUserId();
+        Integer userId = user.getUserId();
 
-        model.addAttribute("notes", noteService.getNotesByUserId(userid));
-        model.addAttribute("files", fileService.getFilesByUserId(userid));
+        model.addAttribute("notes", noteService.getNotesByUserId(userId));
+        model.addAttribute("files", fileService.getFilesByUserId(userId));
         model.addAttribute("activeTab", "files");
         return "home";
     }
@@ -43,11 +43,6 @@ public class HomeController {
         return "result";
     }
 
-
-    @PostMapping("/logout")
-    public String logout() {
-        return "login?logout";
-    }
 
     @GetMapping("/logout")
     public String logoutView() {

@@ -1,6 +1,5 @@
 package com.udacity.jwdnd.course1.cloudstorage.mapper;
 
-import com.udacity.jwdnd.course1.cloudstorage.models.File;
 import com.udacity.jwdnd.course1.cloudstorage.models.Note;
 import org.apache.ibatis.annotations.*;
 
@@ -10,11 +9,11 @@ import java.util.List;
 public interface NoteMapper {
 
     String getAll = "SELECT * FROM NOTES";
-    String getByNoteId = "SELECT * FROM NOTES WHERE noteid = #{noteid}";
-    String getByUserId = "SELECT * FROM NOTES WHERE userid = #{userid}";
-    String update = "UPDATE NOTES SET notetitle = #{notetitle}, notedescription = #{notedescription}, userid = #{userid} WHERE noteid = #{noteid}";
-    String insert = "INSERT INTO NOTES (notetitle, notedescription, userid) VALUES (#{notetitle}, #{notedescription}, #{userid})";
-    String deleteById = "DELETE from NOTES WHERE noteid = #{noteid}";
+    String getByNoteId = "SELECT * FROM NOTES WHERE noteId = #{noteId}";
+    String getByUserId = "SELECT * FROM NOTES WHERE userId = #{userId}";
+    String update = "UPDATE NOTES SET noteTitle = #{noteTitle}, noteDescription = #{noteDescription} WHERE noteId = #{noteId}";
+    String insert = "INSERT INTO NOTES (noteTitle, noteDescription, userId) VALUES (#{noteTitle}, #{noteDescription}, #{userId})";
+    String deleteById = "DELETE from NOTES WHERE noteId = #{noteId}";
 
 
     @Select(getAll)
@@ -26,12 +25,11 @@ public interface NoteMapper {
     @Select(getByUserId)
     List<Note> getNoteByUserId(Integer id);
 
-
     @Update(update)
-    int update(Note notes);
+    Integer updateNote(Integer noteId, String noteTitle, String noteDescription);
 
     @Insert(insert)
-    @Options(useGeneratedKeys = true, keyProperty = "noteid")
+    @Options(useGeneratedKeys = true, keyProperty = "noteId")
     int insert(Note notes);
 
     @Delete(deleteById)

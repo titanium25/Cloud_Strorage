@@ -12,7 +12,7 @@ public interface FileMapper {
     String getByUserId = "SELECT * FROM FILES WHERE userId = #{userId}";
     String insert = "INSERT INTO FILES (fileName, contentType, fileSize, userId, fileData) VALUES(#{fileName}, #{contentType}, #{fileSize}, #{userId}, #{fileData})";
     String deleteById = "DELETE FROM FILES WHERE fileId = #{fileId}";
-    String getFile = "SELECT * FROM FILES WHERE fileId = #{fileId}";
+    String getFileById = "SELECT * FROM FILES WHERE fileId = #{fileId}";
     String getFileNameByUserID = "SELECT * FROM FILES WHERE fileName = #{fileName} AND userId = #{userId}";
 
     @Select(findByFileName)
@@ -25,13 +25,13 @@ public interface FileMapper {
     @Select(getFileNameByUserID)
     File getFileNameByUserID(String fileName, Integer userId);
 
-    @Select(getFile)
-    File getFile(Integer fileId);
+    @Select(getFileById)
+    File getFileById(Integer fileId);
 
     @Insert(insert)
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
-    int insert(File file);
+    int addFile(File file);
 
     @Delete(deleteById)
-    void deleteFile(Integer fileId);
+    void deleteByFileId(Integer fileId);
 }

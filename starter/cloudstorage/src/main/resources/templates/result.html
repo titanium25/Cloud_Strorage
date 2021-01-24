@@ -11,19 +11,17 @@
 </head>
 <body class="p-3 mb-2 bg-light text-black">
 <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
+
     <div class="alert alert-success fill-parent" th:if="${isSuccess}">
         <h1 class="display-5">Success</h1>
-        <span>Your changes were successfully saved. Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to continue.</span>
+        <span th:text="${errorText}" /> Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to continue.</span>
     </div>
-    <div class="alert alert-danger fill-parent" th:if="${not isSuccess} and ${errorType == 1}">
+
+    <div class="alert alert-danger fill-parent" th:if="${not isSuccess}">
         <h1 class="display-5">Error</h1>
-        <span>Your changes were not saved. Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to continue.</span>
+        <span th:text="${errorText}" /> Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to continue.</span>
     </div>
-    <div class="alert alert-danger fill-parent" th:if="${not isSuccess} and ${errorType == 2}">
-        <h1 class="display-5">Error</h1>
-        <span>A file with this name already exists. Please rename or choose a different file to upload.</span>
-        <span>Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to continue.</span>
-    </div>
+
 </div>
 </body>
 </html>

@@ -10,11 +10,11 @@ import java.util.List;
 public interface CredentialMapper {
 
     String getAll = "SELECT * FROM CREDENTIALS";
-    String getByNoteId = "SELECT * FROM NOTES WHERE noteid = #{noteid}";
-    String getByUserId = "SELECT * FROM NOTES WHERE userid = #{userid}";
-    String update = "UPDATE NOTES SET notetitle = #{notetitle}, notedescription = #{notedescription}, userid = #{userid} WHERE noteid = #{noteid}";
-    String insert = "INSERT INTO NOTES (notetitle, notedescription, userid) VALUES (#{notetitle}, #{notedescription}, #{userid})";
-    String deleteById = "DELETE from NOTES WHERE noteid = #{noteid}";
+    String getByNoteId = "SELECT * FROM CREDENTIALS WHERE noteid = #{noteid}";
+    String getByUserId = "SELECT * FROM CREDENTIALS WHERE userid = #{userid}";
+    String update = "UPDATE CREDENTIALS SET notetitle = #{notetitle}, notedescription = #{notedescription}, userid = #{userid} WHERE noteid = #{noteid}";
+    String insert = "INSERT INTO CREDENTIALS (notetitle, notedescription, userid) VALUES (#{notetitle}, #{notedescription}, #{userid})";
+    String deleteById = "DELETE from CREDENTIALS WHERE noteid = #{noteid}";
 
 
     @Select(getByNoteId)

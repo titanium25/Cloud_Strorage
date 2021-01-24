@@ -33,43 +33,33 @@ public class FileController {
         this.userService = userService;
     }
 
-    //https://github.com/addejans/cloudstorage/blob/master/src/main/java/com/udacity/jwdnd/course1/cloudstorage/controller/FileController.java
     @PostMapping("/file-upload")
     public String uploadFile(@RequestParam("fileUpload") MultipartFile fileUpload,
                              Authentication authentication,
-                             RedirectAttributes redirectAttributes,
-                             Model model) throws IOException {
-
-
-
+                             RedirectAttributes redirectAttributes) throws IOException {
         User user = userService.getUser(authentication.getName());
         Integer userId = user.getUserId();
         boolean fileExists = fileService.fileExists(fileUpload.getOriginalFilename(), userId);
+        redirectAttributes.addFlashAttribute("activeTab", "files");
 
-        if (fileExists){
-            redirectAttributes.addFlashAttribute("activeTab", "files");
+        if(fileUpload.isEmpty()){
             redirectAttributes.addFlashAttribute("isSuccess", false);
-            redirectAttributes.addFlashAttribute("errorType", 2);
-        }
-        else if(!fileUpload.isEmpty() && !fileExists){
-            fileService.addFile(fileUpload, userId);
-            redirectAttributes.addFlashAttribute("activeTab", "files");
-            redirectAttributes.addFlashAttribute("isSuccess", true);
+            redirectAttributes.addFlashAttribute("errorText", "You must choose a file to upload.");
+        } else if (fileExists) {
+            redirectAttributes.addFlashAttribute("isSuccess", false);
+            redirectAttributes.addFlashAttribute("errorText", "A file with name " + fileUpload.getOriginalFilename() + " already exists. Please rename or choose a different file to upload.");
         } else {
-            redirectAttributes.addFlashAttribute("activeTab", "files");
-            redirectAttributes.addFlashAttribute("isSuccess", false);
-            redirectAttributes.addFlashAttribute("errorType", 1);
+            fileService.addFile(fileUpload, userId);
+            redirectAttributes.addFlashAttribute("isSuccess", true);
+            redirectAttributes.addFlashAttribute("errorText", "File with name " + fileUpload.getOriginalFilename() + " was successfully uploaded");
         }
 
-//        fileService.addFile(fileUpload, userId);
-//        model.addAttribute("fileList", fileService.getFilesByUserId(userId));
         return "redirect:/result";
-
     }
 
     @GetMapping("/file/download/{fileId}")
     public ResponseEntity downloadFile(@PathVariable Integer fileId) {
-        File file = fileService.downloadFile(fileId);
+        File file = fileService.getFileById(fileId);
         return ResponseEntity.ok()
                 .contentType(MediaType.parseMediaType(file.getContentType()))
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFileName() + "\"")
@@ -77,12 +67,11 @@ public class FileController {
     }
 
     @GetMapping("/file/delete/{fileId}")
-    public String deleteFile(@PathVariable Integer fileId, Authentication authentication, Model model) {
-        User user = userService.getUser(authentication.getName());
-        Integer userId = user.getUserId();
-
+    public String deleteFile(@PathVariable Integer fileId,
+                             RedirectAttributes redirectAttributes) {
         fileService.deleteByFileId(fileId);
-        model.addAttribute("fileList", fileService.getFilesByUserId(userId));
-        return "home";
+        redirectAttributes.addFlashAttribute("isSuccess", true);
+        redirectAttributes.addFlashAttribute("errorText", "File " + fileService.getFileById(fileId)  + " was successfully deleted");
+        return "redirect:/result";
     }
 }

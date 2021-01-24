@@ -32,19 +32,19 @@ public class FileService {
         byte[] bytes = multipartFile.getBytes();
         File file = new File(0, fileName, contentType, fileSize, userId, bytes);
 
-        fileMapper.insert(file);
+        fileMapper.addFile(file);
     }
 
     public void deleteByFileId(Integer fileId){
-        fileMapper.deleteFile(fileId);
+        fileMapper.deleteByFileId(fileId);
     }
 
     public File findByFileName(String fileName){
         return fileMapper.findByFileName(fileName);
     }
 
-    public File downloadFile(Integer fileId){
-        return fileMapper.getFile(fileId);
+    public File getFileById(Integer fileId){
+        return fileMapper.getFileById(fileId);
     }
 
     public boolean fileExists(String fileName, Integer userId){

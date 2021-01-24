@@ -20,42 +20,35 @@ public class NoteController {
         this.userService = userService;
     }
 
-    @PostMapping("/notes")
+    @PostMapping("/note")
     public String postNote(Authentication authentication,
                            @ModelAttribute Note note,
                            RedirectAttributes redirectAttributes) {
-
-
         User user = userService.getUser(authentication.getName());
         Integer userId = user.getUserId();
+        note.setUserId(userId);
 
-            note.setUserid(userId);
+        if (note.getNoteId() == null) {            //add note
             noteService.createNote(note);
+        } else {                                   //update note
+            int noteId = note.getNoteId();
+            String noteTitle = note.getNoteTitle();
+            String noteDescription = note.getNoteDescription();
+            noteService.updateNote(noteId, noteTitle, noteDescription);
+        }
+
             redirectAttributes.addFlashAttribute("activeTab", "notes");
             redirectAttributes.addFlashAttribute("isSuccess", true);
-
         return "redirect:/result";
-
-//        User user = userService.getUser(authentication.getName());
-//        Integer userid = user.getUserId();
-//        note.setUserid(userid);
-//        noteService.createNote(note);
-//        model.addAttribute("notes", noteService.getNotesByUserId(userid));
-//        return "home";
     }
 
     @GetMapping("/note/delete/{noteId}")
-    public String deleteNote(Authentication authentication,
-                             RedirectAttributes redirectAttributes,
+    public String deleteNote(RedirectAttributes redirectAttributes,
                              @ModelAttribute Note note,
                              @PathVariable Integer noteId) {
-        User user = userService.getUser(authentication.getName());
-        Integer userid = user.getUserId();
-        note.setUserid(userid);
-        noteService.deleteNote(note, noteId);
+        noteService.deleteNote(noteId);
         redirectAttributes.addFlashAttribute("activeTab", "notes");
         redirectAttributes.addFlashAttribute("isSuccess", true);
-
         return "redirect:/result";
     }
 
