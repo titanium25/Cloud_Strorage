@@ -23,7 +23,7 @@ public class NoteController {
     }
 
     @PostMapping("/note")
-    public String postNote(Authentication authentication,
+    public String addNote(Authentication authentication,
                            @ModelAttribute Note note,
                            RedirectAttributes redirectAttributes) {
         User user = userService.getUser(authentication.getName());
@@ -31,7 +31,7 @@ public class NoteController {
         note.setUserId(userId);
 
         if (note.getNoteId() == null) {            //add note
-            noteService.createNote(note);
+            noteService.addNote(note);
         } else {                                   //update note
             int noteId = note.getNoteId();
             String noteTitle = note.getNoteTitle();

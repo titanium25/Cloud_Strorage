@@ -15,7 +15,7 @@ public class NoteService {
         this.noteMapper = noteMapper;
     }
 
-    public int createNote(Note note){
+    public int addNote(Note note){
         Note newNote = new Note(note.getNoteId(), note.getNoteTitle(), note.getNoteDescription(), note.getUserId());
         return noteMapper.insert(newNote);
     }
