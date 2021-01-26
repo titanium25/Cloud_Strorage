@@ -16,8 +16,7 @@ public class NoteService {
     }
 
     public int addNote(Note note){
-        Note newNote = new Note(note.getNoteId(), note.getNoteTitle(), note.getNoteDescription(), note.getUserId());
-        return noteMapper.insert(newNote);
+        return noteMapper.insert(note);
     }
 
     public List<Note> getAllNotes(){

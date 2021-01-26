@@ -16,11 +16,18 @@ public class CredentialService {
     }
 
     public int addCredential(Credential credential){
-//        Credential newCredential = new Credential();
         return credentialMapper.insert(credential);
     }
 
     public List<Credential> getAllByUserId(Integer userId) {
         return credentialMapper.getAllByUserId(userId);
+    }
+
+    public void deleteCredential(Integer credentialId) {
+        credentialMapper.deleteByCredentialId(credentialId);
+    }
+
+    public int updateCredential(Integer credentialId, String userName, String url, String key, String password) {
+        return credentialMapper.updateCredential(credentialId, userName, url, key, password);
     }
 }

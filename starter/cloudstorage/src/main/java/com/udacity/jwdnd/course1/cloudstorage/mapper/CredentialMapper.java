@@ -30,5 +30,5 @@ public interface CredentialMapper {
     void deleteByCredentialId(Integer credentialId);
 
     @Update(update)
-    void update(Integer credentialId, String userName, String url, String key, String password);
+    Integer updateCredential(Integer credentialId, String userName, String url, String key, String password);
 }
