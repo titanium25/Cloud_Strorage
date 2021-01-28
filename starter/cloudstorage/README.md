@@ -5,5 +5,7 @@
 
 # ToDo: 
 
-* Fix new user registration 
+* Fix registration  
+  https://knowledge.udacity.com/questions/405302
+* Add user edit page
 * Test's
