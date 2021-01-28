@@ -3,10 +3,7 @@
 * UserName: user
 * Password: 123
 
-# ToDo:
-* CredentialController:
-  * Fix urlName bug in delete message
-  * Check user input
-* Add user page    
+# ToDo: 
+
 * Fix new user registration 
 * Test's

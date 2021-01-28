@@ -44,11 +44,11 @@ public class CredentialController {
 
     @GetMapping("/delete/{credentialId}")
     public String deleteCredential(RedirectAttributes redirectAttributes,
-                                   @ModelAttribute Credential credential,
                                    @PathVariable Integer credentialId) {
-        redirectAttributes.addFlashAttribute("activeTab", "credentials");
+        Credential credential = credentialService.getByCredentialId(credentialId);
         redirectAttributes.addFlashAttribute("isSuccess", true);
         redirectAttributes.addFlashAttribute("errorText", "URL " + credential.getUrl() + " was deleted");
+        redirectAttributes.addFlashAttribute("activeTab", "credentials");
         credentialService.deleteCredential(credentialId);
         return "redirect:/result";
     }

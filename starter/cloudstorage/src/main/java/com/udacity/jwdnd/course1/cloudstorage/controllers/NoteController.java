@@ -6,13 +6,11 @@ import com.udacity.jwdnd.course1.cloudstorage.services.NoteService;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
+@RequestMapping("/note")
 public class NoteController {
     private final NoteService noteService;
     private final UserService userService;
@@ -22,7 +20,7 @@ public class NoteController {
         this.userService = userService;
     }
 
-    @PostMapping("/note")
+    @PostMapping
     public String addNote(Authentication authentication,
                            @ModelAttribute Note note,
                            RedirectAttributes redirectAttributes) {
@@ -44,7 +42,7 @@ public class NoteController {
         return "redirect:/result";
     }
 
-    @GetMapping("/note/delete/{noteId}")
+    @GetMapping("/delete/{noteId}")
     public String deleteNote(RedirectAttributes redirectAttributes,
                              @ModelAttribute Note note,
                              @PathVariable Integer noteId) {

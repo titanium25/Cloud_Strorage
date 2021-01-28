@@ -10,16 +10,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
 
 @Controller
+@RequestMapping("/file")
 public class FileController {
 
 
@@ -31,7 +29,7 @@ public class FileController {
         this.userService = userService;
     }
 
-    @PostMapping("/file-upload")
+    @PostMapping
     public String uploadFile(@RequestParam("fileUpload") MultipartFile fileUpload,
                              Authentication authentication,
                              RedirectAttributes redirectAttributes) throws IOException {
@@ -55,7 +53,7 @@ public class FileController {
         return "redirect:/result";
     }
 
-    @GetMapping("/file/download/{fileId}")
+    @GetMapping("/download/{fileId}")
     public ResponseEntity downloadFile(@PathVariable Integer fileId) {
         File file = fileService.getFileById(fileId);
         return ResponseEntity.ok()
@@ -64,14 +62,14 @@ public class FileController {
                 .body(new ByteArrayResource(file.getFileData()));
     }
 
-    @GetMapping("/file/delete/{fileId}")
+    @GetMapping("/delete/{fileId}")
     public String deleteFile(@PathVariable Integer fileId,
                              RedirectAttributes redirectAttributes) {
         File file = fileService.getFileById(fileId);
-        fileService.deleteByFileId(fileId);
         redirectAttributes.addFlashAttribute("isSuccess", true);
         redirectAttributes.addFlashAttribute("errorText", "File " + file.getFileName() + " was successfully deleted");
         redirectAttributes.addFlashAttribute("activeTab", "files");
+        fileService.deleteByFileId(fileId);
         return "redirect:/result";
     }
 }
