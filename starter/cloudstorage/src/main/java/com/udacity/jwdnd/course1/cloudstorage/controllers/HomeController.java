@@ -26,10 +26,10 @@ public class HomeController {
         this.encryptionService = encryptionService;
     }
 
-    @ModelAttribute("encryptionService")
-    public EncryptionService getEncryptionService() {
-        return new EncryptionService();
-    }
+//    @ModelAttribute("encryptionService")
+//    public EncryptionService getEncryptionService() {
+//        return new EncryptionService();
+//    }
 
     @GetMapping("/home")
     public String getHomePage(Authentication authentication, Model model) {
@@ -39,6 +39,7 @@ public class HomeController {
         model.addAttribute("notes", noteService.getNotesByUserId(userId));
         model.addAttribute("files", fileService.getFilesByUserId(userId));
         model.addAttribute("credentials", credentialService.getAllByUserId(userId));
+        model.addAttribute("encryptionService", new EncryptionService());
         model.addAttribute("activeTab", "files");
         return "home";
     }

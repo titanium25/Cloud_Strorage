@@ -27,6 +27,11 @@ public class CredentialController {
         this.encryptionService = encryptionService;
     }
 
+    @ModelAttribute("encryptionService")
+    public EncryptionService getEncryptionService() {
+        return new EncryptionService();
+    }
+
     @PostMapping("/credential")
     public String addCredential(Authentication authentication,
                                 @ModelAttribute Credential credential,
@@ -38,13 +43,13 @@ public class CredentialController {
         if(credential.getCredentialId() == null) {
             credentialService.addCredential(credential);
         } else {
-
             credentialService.updateCredential(credential);
         }
 
 
         redirectAttributes.addFlashAttribute("activeTab", "credentials");
         redirectAttributes.addFlashAttribute("isSuccess", true);
+        redirectAttributes.addFlashAttribute("encryptionService",  new EncryptionService());
 
         return "redirect:/result";
     }
