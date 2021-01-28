@@ -38,5 +38,3 @@ CREATE TABLE IF NOT EXISTS CREDENTIALS (
 INSERT INTO USERS (userId, userName, salt, password, firstName, lastName) VALUES
 ('1', 'user', 'ypHX8w5++uSwvHIGZlx6lw==', '1JQIfs1JvrJoG7gmQGjT/g==', 'Alex', 'Lazarovich'); // password = 123
 
-INSERT INTO CREDENTIALS (credentialId, url, userName, key, password, userId) VALUES
-('23', 'test.com', 'user', 'B0JjuPD5rqBFScnfHCpgKw==', '3b7LWKcAt2Wk7cvnblBvvg==', '1'); // password = test

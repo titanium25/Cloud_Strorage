@@ -16,20 +16,18 @@ public class HomeController {
     private UserService userService;
     private FileService fileService;
     private CredentialService credentialService;
-    private EncryptionService encryptionService;
 
-    public HomeController(NoteService noteService, UserService userService, FileService fileService, CredentialService credentialService, EncryptionService encryptionService) {
+    public HomeController(NoteService noteService, UserService userService, FileService fileService, CredentialService credentialService) {
         this.noteService = noteService;
         this.userService = userService;
         this.fileService = fileService;
         this.credentialService = credentialService;
-        this.encryptionService = encryptionService;
     }
 
-//    @ModelAttribute("encryptionService")
-//    public EncryptionService getEncryptionService() {
-//        return new EncryptionService();
-//    }
+    @ModelAttribute("encryptionService")
+    public EncryptionService getEncryptionService() {
+        return new EncryptionService();
+    }
 
     @GetMapping("/home")
     public String getHomePage(Authentication authentication, Model model) {
@@ -39,7 +37,6 @@ public class HomeController {
         model.addAttribute("notes", noteService.getNotesByUserId(userId));
         model.addAttribute("files", fileService.getFilesByUserId(userId));
         model.addAttribute("credentials", credentialService.getAllByUserId(userId));
-        model.addAttribute("encryptionService", new EncryptionService());
         model.addAttribute("activeTab", "files");
         return "home";
     }
