@@ -4,18 +4,32 @@ import com.udacity.jwdnd.course1.cloudstorage.mapper.CredentialMapper;
 import com.udacity.jwdnd.course1.cloudstorage.models.Credential;
 import org.springframework.stereotype.Service;
 
+import java.security.SecureRandom;
+import java.util.Base64;
 import java.util.List;
 
 @Service
 public class CredentialService {
 
     private CredentialMapper credentialMapper;
+    private EncryptionService encryptionService;
 
-    public CredentialService(CredentialMapper credentialMapper) {
+    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService) {
         this.credentialMapper = credentialMapper;
+        this.encryptionService = encryptionService;
     }
 
     public int addCredential(Credential credential){
+        SecureRandom random = new SecureRandom();
+        byte[] key = new byte[16];
+        random.nextBytes(key);
+        String encodedKey = Base64.getEncoder().encodeToString(key);
+        String encryptedPassword = encryptionService.encryptValue(credential.getPassword(), encodedKey);
+        System.out.println("Password before encryption: " + credential.getPassword());
+        System.out.println("Key: " + encodedKey);
+        System.out.println("Password after encryption: " + encryptedPassword);
+        credential.setKey(encodedKey);
+        credential.setPassword(encryptedPassword);
         return credentialMapper.insert(credential);
     }
 
@@ -23,11 +37,15 @@ public class CredentialService {
         return credentialMapper.getAllByUserId(userId);
     }
 
+    public Credential getByCredentialId(Integer credentialId) {
+        return credentialMapper.getByCredentialId(credentialId);
+    }
+
     public void deleteCredential(Integer credentialId) {
         credentialMapper.deleteByCredentialId(credentialId);
     }
 
-    public int updateCredential(Integer credentialId, String userName, String url, String key, String password) {
-        return credentialMapper.updateCredential(credentialId, userName, url, key, password);
+    public int updateCredential(Credential credential) {
+        return credentialMapper.updateCredential(credential);
     }
 }

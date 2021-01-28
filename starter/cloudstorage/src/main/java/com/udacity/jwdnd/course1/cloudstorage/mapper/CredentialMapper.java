@@ -12,9 +12,9 @@ public interface CredentialMapper {
     String getAllByUserId = "SELECT * FROM CREDENTIALS WHERE userId = #{userId}";
     String insert = "INSERT INTO CREDENTIALS (url, userName, key, password, userId) VALUES(#{url}, #{userName}, #{key}, #{password}, #{userId})";
     String deleteByCredentialId = "DELETE FROM CREDENTIALS WHERE credentialId = #{credentialId}";
-    String update = "UPDATE CREDENTIALS SET url = #{url}, key = #{key}, password = #{password}, userName = #{userName} WHERE credentialId = #{credentialId}";
+    String update = "UPDATE CREDENTIALS SET url = #{url}, userName = #{userName}, key = #{key}, password = #{password} WHERE credentialId = #{credentialId}";
 
-    // use to select and then delete credential
+    // use to select credential
     @Select(getByCredentialId)
     Credential getByCredentialId(Integer credentialId);
 
@@ -30,5 +30,5 @@ public interface CredentialMapper {
     void deleteByCredentialId(Integer credentialId);
 
     @Update(update)
-    Integer updateCredential(Integer credentialId, String userName, String url, String key, String password);
+    int updateCredential(Credential credential);
 }

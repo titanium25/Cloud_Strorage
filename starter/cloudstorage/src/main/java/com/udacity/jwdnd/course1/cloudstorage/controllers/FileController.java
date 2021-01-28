@@ -45,11 +45,11 @@ public class FileController {
             redirectAttributes.addFlashAttribute("errorText", "You must choose a file to upload.");
         } else if (fileExists) {
             redirectAttributes.addFlashAttribute("isSuccess", false);
-            redirectAttributes.addFlashAttribute("errorText", "A file with name " + fileUpload.getOriginalFilename() + " already exists. Please rename or choose a different file to upload.");
+            redirectAttributes.addFlashAttribute("errorText", "File " + fileUpload.getOriginalFilename() + " already exists. Please rename or choose a different file to upload.");
         } else {
             fileService.addFile(fileUpload, userId);
             redirectAttributes.addFlashAttribute("isSuccess", true);
-            redirectAttributes.addFlashAttribute("errorText", "File with name " + fileUpload.getOriginalFilename() + " was successfully uploaded");
+            redirectAttributes.addFlashAttribute("errorText", "File " + fileUpload.getOriginalFilename() + " was successfully uploaded");
         }
 
         return "redirect:/result";
@@ -67,9 +67,11 @@ public class FileController {
     @GetMapping("/file/delete/{fileId}")
     public String deleteFile(@PathVariable Integer fileId,
                              RedirectAttributes redirectAttributes) {
+        File file = fileService.getFileById(fileId);
         fileService.deleteByFileId(fileId);
         redirectAttributes.addFlashAttribute("isSuccess", true);
-        redirectAttributes.addFlashAttribute("errorText", "File " + fileService.getFileById(fileId)  + " was successfully deleted");
+        redirectAttributes.addFlashAttribute("errorText", "File " + file.getFileName() + " was successfully deleted");
+        redirectAttributes.addFlashAttribute("activeTab", "files");
         return "redirect:/result";
     }
 }

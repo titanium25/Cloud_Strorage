@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS USERS (
   userId INT PRIMARY KEY auto_increment,
-  username VARCHAR(20),
+  userName VARCHAR(20),
   salt VARCHAR,
   password VARCHAR,
-  firstname VARCHAR(20),
-  lastname VARCHAR(20)
+  firstName VARCHAR(20),
+  lastName VARCHAR(20)
 );
 
 CREATE TABLE IF NOT EXISTS NOTES (
@@ -35,5 +35,8 @@ CREATE TABLE IF NOT EXISTS CREDENTIALS (
     foreign key (userId) references USERS(userId)
 );
 
-INSERT INTO USERS (userid, username, salt, password, firstname, lastname) VALUES
+INSERT INTO USERS (userId, userName, salt, password, firstName, lastName) VALUES
 ('1', 'user', 'ypHX8w5++uSwvHIGZlx6lw==', '1JQIfs1JvrJoG7gmQGjT/g==', 'Alex', 'Lazarovich'); // password = 123
+
+INSERT INTO CREDENTIALS (credentialId, url, userName, key, password, userId) VALUES
+('1', 'test.com', 'user', 'B0JjuPD5rqBFScnfHCpgKw==', '3b7LWKcAt2Wk7cvnblBvvg==', '1'); // password = test
