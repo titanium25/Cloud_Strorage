@@ -30,7 +30,7 @@ public interface FileMapper {
 
     @Insert(insert)
     @Options(useGeneratedKeys = true, keyProperty = "fileId")
-    int addFile(File file);
+    Integer addFile(File file);
 
     @Delete(deleteById)
     void deleteByFileId(Integer fileId);

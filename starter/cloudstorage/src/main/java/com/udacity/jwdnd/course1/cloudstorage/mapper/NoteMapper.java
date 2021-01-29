@@ -26,11 +26,11 @@ public interface NoteMapper {
     List<Note> getNoteByUserId(Integer id);
 
     @Update(update)
-    Integer updateNote(Integer noteId, String noteTitle, String noteDescription);
+    Integer updateNote(Note note);
 
     @Insert(insert)
     @Options(useGeneratedKeys = true, keyProperty = "noteId")
-    int insert(Note notes);
+    Integer insert(Note notes);
 
     @Delete(deleteById)
     void delete(int id);

@@ -24,11 +24,11 @@ public interface CredentialMapper {
 
     @Insert(insert)
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
-    int insert(Credential credential);
+    Integer insert(Credential credential);
 
     @Delete(deleteByCredentialId)
     void deleteByCredentialId(Integer credentialId);
 
     @Update(update)
-    int updateCredential(Credential credential);
+    Integer updateCredential(Credential credential);
 }

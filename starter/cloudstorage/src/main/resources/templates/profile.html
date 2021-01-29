@@ -3,69 +3,78 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+    <link media="all" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
 
-    <title>User profile</title>
+    <title>Edit user profile</title>
 </head>
 <body class="p-3 mb-2 bg-light text-black">
 
 <div class="container">
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-light mb-3" style="background-color: #cfe2e7;">
-    <div class="container-fluid">
-        <!-- LOGO -->
-        <div>
-            <a class="navbar-brand " href="#">
-                <img src="/img/logo/favicon.png" alt="Cloud Storage"
-                     class="d-inline-block align-top rounded-circle">
-                Cloud Storage
-            </a>
-        </div>
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light mb-3" style="background-color: #cfe2e7;">
+        <div class="container-fluid">
+            <!-- LOGO -->
+            <div>
+                <a class="navbar-brand " href="#">
+                    <img alt="Cloud Storage" class="d-inline-block align-top rounded-circle"
+                         src="/img/logo/favicon.png">
+                    Cloud Storage
+                </a>
+            </div>
 
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-                aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="/home">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="/profile">My profile</a>
-                </li>
-            </ul>
-            <div class="navbar-text mr-3">
-                Hello <span th:text="${user.getUserName()}"/>
-            </div>
-            <div class="navbar-text mr-3">
-                <form class="d-flex" action="#" th:action="@{/logout}" method="POST">
-                    <button class="btn btn-outline-dark me-2" type="submit">Logout</button>
-                </form>
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler" data-bs-target="#navbarSupportedContent"
+                    data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/profile">My profile</a>
+                    </li>
+                </ul>
+                <div class="navbar-text mr-3">
+                    Hello <span th:text="${user.getUserName()}"/>
+                </div>
+                <div class="navbar-text mr-3">
+                    <form action="#" class="d-flex" method="POST" th:action="@{/logout}">
+                        <button class="btn btn-outline-dark me-2" type="submit">Logout</button>
+                    </form>
+                </div>
             </div>
         </div>
+    </nav>
+
+    <div class="container mt-3 col-md-4">
+        <h2>Edit your profile</h2>
+        <div class="alert alert-success" role="alert" th:if="${profileSuccess}">
+            <span th:text="${profileMessage}"></span>
+        </div>
+        <form action="#" method="POST" th:action="@{/profile}">
+            <input type="hidden" name="userId" id="user-id">
+            <div class="mb-3">
+                <label class="col-form-label" for="user-name">User name: </label>
+                <input class="form-control" id="user-name" name="userName" required
+                       th:value="${user.getUserName()}" type="text">
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label" for="first-name">First name: </label>
+                <input class="form-control" id="first-name" name="FirstName" required
+                       th:value="${user.getFirstName()}" type="text">
+            </div>
+            <div class="mb-3">
+                <label class="col-form-label" for="last-name">Last name: </label>
+                <input class="form-control" id="last-name" name="LastName" required th:value="${user.getLastName()}"
+                       type="text">
+            </div>
+            <button class="btn btn-primary" type="submit">Confirm</button>
+        </form>
     </div>
-</nav>
-<div class="container mt-5">
-<h2>Edit your profile</h2>
-<form action="#" th:action="@{/profile}" method="post">
-    <div class="mb-3">
-        <label for="user-name" class="col-form-label">Username: </label>
-        <input type="text" name="userName" id="user-name" th:value="${user.getUserName()}">
-    </div>
-    <div class="mb-3">
-        <label for="first-name" class="col-form-label">First name: </label>
-        <input type="text" name="FirstName" id="first-name" th:value="${user.getFirstName()}">
-    </div>
-    <div class="mb-3">
-        <label for="last-name" class="col-form-label">Last name: </label>
-        <input type="text" name="LastName" id="last-name" th:value="${user.getLastName()}">
-    </div>
-</form>
-</div>
 </div>
 </body>
 </html>

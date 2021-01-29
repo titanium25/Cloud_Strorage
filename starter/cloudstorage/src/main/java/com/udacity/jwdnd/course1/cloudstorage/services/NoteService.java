@@ -31,11 +31,11 @@ public class NoteService {
         return noteMapper.getNoteByNoteId(noteId);
     }
 
-    public int updateNote(Integer noteId, String noteTitle, String noteDescription){
-        return noteMapper.updateNote(noteId,noteTitle,noteDescription);
+    public int updateNote(Note note){
+        return noteMapper.updateNote(note);
     }
 
-    public void deleteNote(Integer id){
-        noteMapper.delete(id);
+    public void deleteNote(Integer noteId){
+        noteMapper.delete(noteId);
     }
 }

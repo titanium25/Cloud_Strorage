@@ -16,8 +16,8 @@ public interface UserMapper {
 
     @Insert(insert)
     @Options(useGeneratedKeys = true, keyProperty = "userId")
-    int insert(User user);
+    Integer insert(User user);
 
     @Update(update)
-    int updateNote(Integer noteId, String noteTitle, String noteDescription);
+    Integer updateUser(User user);
 }

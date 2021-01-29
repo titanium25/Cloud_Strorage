@@ -35,4 +35,8 @@ public class UserService {
     public User getUser(String username) {
         return userMapper.getUser(username);
     }
+
+    public int updateUser(User user){
+        return userMapper.updateUser(user);
+    }
 }

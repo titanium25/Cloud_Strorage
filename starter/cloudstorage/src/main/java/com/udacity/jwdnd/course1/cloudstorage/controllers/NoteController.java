@@ -28,17 +28,14 @@ public class NoteController {
         Integer userId = user.getUserId();
         note.setUserId(userId);
 
-        if (note.getNoteId() == null) {            //add note
+        if (note.getNoteId() == null) {
             noteService.addNote(note);
-        } else {                                   //update note
-            int noteId = note.getNoteId();
-            String noteTitle = note.getNoteTitle();
-            String noteDescription = note.getNoteDescription();
-            noteService.updateNote(noteId, noteTitle, noteDescription);
+        } else {
+            noteService.updateNote(note);
         }
 
-            redirectAttributes.addFlashAttribute("activeTab", "notes");
-            redirectAttributes.addFlashAttribute("isSuccess", true);
+        redirectAttributes.addFlashAttribute("activeTab", "notes");
+        redirectAttributes.addFlashAttribute("isSuccess", true);
         return "redirect:/result";
     }
 
