@@ -38,6 +38,7 @@ public class HomeController {
         model.addAttribute("files", fileService.getFilesByUserId(userId));
         model.addAttribute("credentials", credentialService.getAllByUserId(userId));
         model.addAttribute("activeTab", "files");
+        model.addAttribute("userName", user.getUserName());
         return "home";
     }
 
