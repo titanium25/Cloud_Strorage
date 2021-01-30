@@ -55,30 +55,40 @@
         <div class="alert alert-success" role="alert" th:if="${profileSuccess}">
             <span th:text="${profileMessage}"></span>
         </div>
-        <form action="#" method="POST" th:action="@{/profile}">
-            <input type="hidden" name="userId" id="user-id">
-            <div class="mb-3">
-                <label class="col-form-label" for="user-name">User name: </label>
-                <input class="form-control" id="user-name" name="userName" required
-                       th:value="${user.getUserName()}" type="text">
-            </div>
-            <div class="mb-3">
-                <label class="col-form-label" for="password">Password: </label>
-                <input class="form-control" id="password" name="password" required
-                       th:value="${user.getPassword()}" type="password">
-            </div>
-            <div class="mb-3">
-                <label class="col-form-label" for="first-name">First name: </label>
-                <input class="form-control" id="first-name" name="firstName" required
-                       th:value="${user.getFirstName()}" type="text">
-            </div>
-            <div class="mb-3">
-                <label class="col-form-label" for="last-name">Last name: </label>
-                <input class="form-control" id="last-name" name="lastName" required th:value="${user.getLastName()}"
-                       type="text">
-            </div>
-            <button class="btn btn-primary" type="submit">Confirm</button>
-        </form>
+        <div class="row">
+            <form action="#" method="POST" th:action="@{/profile}">
+                <div class="col mb-3">
+                    <label class="col-form-label" for="user-name">User name: </label>
+                    <input class="form-control" id="user-name" name="userName" required
+                           th:value="${user.getUserName()}" type="text">
+                </div>
+                <div class="col mb-3">
+                    <label class="col-form-label" for="newPass">New password: </label>
+                    <input class="form-control" id="newPass" name="password" required
+                           type="password">
+                </div>
+                <div class="col mb-3">
+                    <label class="col-form-label" for="confPass">Confirm password: </label>
+                    <input class="form-control" id="confPass" name="confPassword" required
+                           type="password">
+                </div>
+
+                <div class="row">
+                    <div class="col mb-3">
+                        <label class="col-form-label" for="first-name">First name: </label>
+                        <input class="form-control" id="first-name" name="firstName" required
+                               th:value="${user.getFirstName()}" type="text">
+                    </div>
+                    <div class="col mb-3">
+                        <label class="col-form-label" for="last-name">Last name: </label>
+                        <input class="form-control" id="last-name" name="lastName" required
+                               th:value="${user.getLastName()}"
+                               type="text">
+                    </div>
+                </div>
+                    <button class="btn btn-primary" type="submit">Confirm</button>
+            </form>
+        </div>
     </div>
 </div>
 </body>

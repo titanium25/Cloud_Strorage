@@ -2,10 +2,45 @@
 
 * UserName: user
 * Password: 123
-
-# ToDo: 
-
-* Fix registration  
-  https://knowledge.udacity.com/questions/405302
-* Add user edit page
+# Done:
+* Security:
+  * Login page
+  * Signup page
+  * Add a new user  
+  * Hash and store user password
+* Interface:
+  * Redirect to current tab
+  * Navigation menu
+  * Cloud storage logo  
+  * Username greetings in navBar
+  * Logout button
+* Profile edit page:
+  * User can changed they data
+  * Session's   
+  * Data validation
+* File upload:
+  * Upload a new file to storage
+  * Delete file
+  * Download file
+  * Success message
+  * Validation for empty input
+* User note's:
+  * Add a new note
+  * Delete file
+  * Edit file
+  * Success message 
+  * Validation for empty input (front end BootStarp)
+* User Credential's:
+  * Add a new credential
+  * Delete credential
+  * Edit credential
+  * Encrypt users password when adding new credential
+  * Decrypt a password when editing credentials
+  
+# ToDo:
 * Test's
+* A new login and signup page
+  * Email and password validation
+* User profile image
+* User roles
+* Admin page
