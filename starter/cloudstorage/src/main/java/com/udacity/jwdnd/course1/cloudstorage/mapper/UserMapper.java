@@ -8,8 +8,8 @@ import org.apache.ibatis.annotations.*;
 public interface UserMapper {
 
     String getUserByUserName = "SELECT * FROM USERS WHERE userName = #{userName}";
-    String insert = "INSERT INTO USERS (userName, salt, password, firstName, lastName) VALUES(#{userName}, #{salt}, #{password}, #{firstName}, #{lastName})";
-    String update = "UPDATE USERS SET userName = #{userName}, password = #{password}, firstName = #{firstName}, lastName = #{lastName} WHERE userId = #{userId}";
+    String insert = "INSERT INTO USERS (userName, salt, password, firstName, lastName, email) VALUES(#{userName}, #{salt}, #{password}, #{firstName}, #{lastName}, #{email})";
+    String update = "UPDATE USERS SET userName = #{userName}, password = #{password}, firstName = #{firstName}, lastName = #{lastName}, email = #{email} WHERE userId = #{userId}";
 
     @Select(getUserByUserName)
     User getUser(String userName);
