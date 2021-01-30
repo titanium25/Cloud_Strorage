@@ -63,13 +63,18 @@
                        th:value="${user.getUserName()}" type="text">
             </div>
             <div class="mb-3">
+                <label class="col-form-label" for="password">Password: </label>
+                <input class="form-control" id="password" name="password" required
+                       th:value="${user.getPassword()}" type="password">
+            </div>
+            <div class="mb-3">
                 <label class="col-form-label" for="first-name">First name: </label>
-                <input class="form-control" id="first-name" name="FirstName" required
+                <input class="form-control" id="first-name" name="firstName" required
                        th:value="${user.getFirstName()}" type="text">
             </div>
             <div class="mb-3">
                 <label class="col-form-label" for="last-name">Last name: </label>
-                <input class="form-control" id="last-name" name="LastName" required th:value="${user.getLastName()}"
+                <input class="form-control" id="last-name" name="lastName" required th:value="${user.getLastName()}"
                        type="text">
             </div>
             <button class="btn btn-primary" type="submit">Confirm</button>

@@ -9,6 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class HomeController {
 
@@ -30,10 +33,18 @@ public class HomeController {
     }
 
     @GetMapping("/home")
-    public String getHomePage(Authentication authentication, Model model) {
-        User user = userService.getUser(authentication.getName());
+    public String getHomePage(Authentication authentication, Model model, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        String userName = (String) session.getAttribute("userName");
+        System.out.println("SESSION NAME: " + userName);
+        User user;
+        if(userName != null){
+            user = userService.getUser(userName);
+        } else{
+            user = userService.getUser(authentication.getName());
+        }
         Integer userId = user.getUserId();
-
+        System.out.println("ID: " + userId);
         model.addAttribute("notes", noteService.getNotesByUserId(userId));
         model.addAttribute("files", fileService.getFilesByUserId(userId));
         model.addAttribute("credentials", credentialService.getAllByUserId(userId));

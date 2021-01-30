@@ -9,7 +9,7 @@ public interface UserMapper {
 
     String getUserByUserName = "SELECT * FROM USERS WHERE userName = #{userName}";
     String insert = "INSERT INTO USERS (userName, salt, password, firstName, lastName) VALUES(#{userName}, #{salt}, #{password}, #{firstName}, #{lastName})";
-    String update = "UPDATE USERS SET userName = #{userName}, firstName = #{firstName}, lastName = #{lastName} WHERE userId = #{userId}";
+    String update = "UPDATE USERS SET userName = #{userName}, password = #{password}, firstName = #{firstName}, lastName = #{lastName} WHERE userId = #{userId}";
 
     @Select(getUserByUserName)
     User getUser(String userName);
@@ -19,5 +19,5 @@ public interface UserMapper {
     Integer insert(User user);
 
     @Update(update)
-    Integer updateUser(User user);
+    int updateUser(User user);
 }
