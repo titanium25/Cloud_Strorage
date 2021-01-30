@@ -6,10 +6,12 @@ import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Map;
 
 @Controller
 @RequestMapping("profile")
@@ -41,22 +43,39 @@ public class ProfileController {
     }
 
     @PostMapping
-    public String updateProfile(@ModelAttribute User user, Model model, Authentication authentication, HttpServletRequest request){
+    public String updateProfile(@ModelAttribute User user,
+                                @RequestParam("confPass") String passwordConfirm,
+                                Model model,
+                                Authentication authentication,
+                                HttpServletRequest request){
         User authUser;
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("userName");
         if(userName != null){
             authUser = userService.getUser(userName);
-        } else{
+        } else {
             authUser = userService.getUser(authentication.getName());
         }
         user.setUserId(authUser.getUserId());
-        user = isSamePassword(authUser, user);
-        userService.updateUser(user);
-        session.setAttribute("userName", user.getUserName());
-        model.addAttribute("profileSuccess", true);
-        model.addAttribute("profileMessage", "Your profile was edited successfully");
-        return "profile";
+        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
+        boolean isPasswordDifferent = user.getPassword() != null && !user.getPassword().equals(passwordConfirm);
+        if(isConfirmEmpty) {
+            model.addAttribute("password2Error", true);
+            model.addAttribute("password2ErrorText", "Password confirmation cannot be empty");
+            return "profile";
+        } else if(isPasswordDifferent) {
+            model.addAttribute("passwordError", true);
+            model.addAttribute("passwordErrorText", "Passwords are different!");
+            return "profile";
+        } else {
+
+            user = isSamePassword(authUser, user);
+            userService.updateUser(user);
+            session.setAttribute("userName", user.getUserName());
+            model.addAttribute("profileSuccess", true);
+            model.addAttribute("profileMessage", "Your profile was edited successfully");
+            return "profile";
+        }
     }
     public User isSamePassword(User databaseUser, User formUser){
         String hashedPassword;
