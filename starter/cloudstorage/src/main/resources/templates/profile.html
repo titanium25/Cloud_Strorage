@@ -50,46 +50,51 @@
         </div>
     </nav>
 
-    <div class="container mt-3 col-md-4">
+    <div class="container mt-3 col-md-7">
         <h2>Edit your profile</h2>
         <div class="alert alert-success" role="alert" th:if="${profileSuccess}">
             <span th:text="${profileMessage}"></span>
         </div>
-        <div class="row">
-            <form action="#" method="POST" th:action="@{/profile}">
-                <div class="col mb-3">
-                    <label class="col-form-label" for="user-name">User name: </label>
-                    <input class="form-control" id="user-name" name="userName" required
-                           th:value="${user.getUserName()}" type="text">
+        <form action="#" method="POST" th:action="@{/profile}">
+            <div class="row">
+                <div class="col">
+                    <label class="col-form-label" for="user-name">Username: </label>
+                    <input class="form-control" id="user-name" name="userName" th:value="${user.getUserName()}" type="text" required>
                 </div>
-                <div class="col mb-3">
-                    <label class="col-form-label" for="newPass">New password: </label>
-                    <input class="form-control" id="newPass" name="password" required
-                           type="password">
+                <div class="col">
+                    <label class="col-form-label" for="first-name">Fisrt name: </label>
+                    <input class="form-control" id="first-name" name="firstName" th:value="${user.getFirstName()}" type="text" required>
                 </div>
-                <div class="col mb-3">
-                    <label class="col-form-label" for="confPass">Confirm password: </label>
-                    <input class="form-control" id="confPass" name="confPassword" required
-                           type="password">
+            </div>
+            <div class="row">
+                <div class="col">
+                    <label class="col-form-label" for="password">New password: </label>
+                    <input class="form-control" id="password" name="password" type="password" required>
                 </div>
-
-                <div class="row">
-                    <div class="col mb-3">
-                        <label class="col-form-label" for="first-name">First name: </label>
-                        <input class="form-control" id="first-name" name="firstName" required
-                               th:value="${user.getFirstName()}" type="text">
-                    </div>
-                    <div class="col mb-3">
-                        <label class="col-form-label" for="last-name">Last name: </label>
-                        <input class="form-control" id="last-name" name="lastName" required
-                               th:value="${user.getLastName()}"
-                               type="text">
-                    </div>
+                <div class="col">
+                    <label class="col-form-label" for="last-name">Last name: </label>
+                    <input class="form-control" id="last-name" name="lastName"  th:value="${user.getLastName()}" type="text" required>
                 </div>
-                    <button class="btn btn-primary" type="submit">Confirm</button>
-            </form>
-        </div>
+            </div>
+            <div class="row">
+                <div class="col col-md-6">
+                    <label class="col-form-label" for="conf-pass">Confirm new password: </label>
+                    <input class="form-control" id="conf-pass" name="confPass" type="password" placeholder="Under development" disabled>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col mb-3 col-md-6">
+                    <label class="col-form-label" for="email">Email: </label>
+                    <input class="form-control" id="email" name="email" type="email" placeholder="Under development" disabled>
+                </div>
+            </div>
+            <div class="row col">
+                <button class="btn btn-primary" type="submit">Confirm</button>
+            </div>
+        </form>
     </div>
 </div>
 </body>
 </html>
+
+
