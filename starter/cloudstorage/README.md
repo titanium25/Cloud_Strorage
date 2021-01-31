@@ -24,6 +24,7 @@
   * Download file
   * Success message
   * Validation for empty input
+  * File upload limit 10mb for avoiding application get crashed
 * User note's:
   * Add a new note
   * Delete file
