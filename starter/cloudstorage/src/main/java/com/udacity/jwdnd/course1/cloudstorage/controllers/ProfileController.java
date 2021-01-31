@@ -44,38 +44,40 @@ public class ProfileController {
 
     @PostMapping
     public String updateProfile(@ModelAttribute User user,
+                                @RequestParam("password") String newPassword,
                                 @RequestParam("confPass") String passwordConfirm,
                                 Model model,
                                 Authentication authentication,
                                 HttpServletRequest request){
+
         User authUser;
         HttpSession session = request.getSession();
         String userName = (String) session.getAttribute("userName");
+        boolean isNewPassEmpty = StringUtils.isEmpty(newPassword);
+        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
+        boolean isPasswordDifferent = newPassword.equals(passwordConfirm);
+
         if(userName != null){
             authUser = userService.getUser(userName);
         } else {
             authUser = userService.getUser(authentication.getName());
         }
         user.setUserId(authUser.getUserId());
-        boolean isConfirmEmpty = StringUtils.isEmpty(passwordConfirm);
-        boolean isPasswordDifferent = user.getPassword() != null && !user.getPassword().equals(passwordConfirm);
-        if(isConfirmEmpty) {
+
+        if(isConfirmEmpty && !isNewPassEmpty) {
             model.addAttribute("password2Error", true);
             model.addAttribute("password2ErrorText", "Password confirmation cannot be empty");
-            return "profile";
-        } else if(isPasswordDifferent) {
+        } else if(!isPasswordDifferent) {
             model.addAttribute("passwordError", true);
             model.addAttribute("passwordErrorText", "Passwords are different!");
-            return "profile";
         } else {
-
             user = isSamePassword(authUser, user);
             userService.updateUser(user);
             session.setAttribute("userName", user.getUserName());
             model.addAttribute("profileSuccess", true);
             model.addAttribute("profileMessage", "Your profile was edited successfully");
-            return "profile";
         }
+        return "profile";
     }
     public User isSamePassword(User databaseUser, User formUser){
         String hashedPassword;
