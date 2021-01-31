@@ -17,7 +17,7 @@
 
     <h1 class="display-5">Sign Up</h1>
     <form action="#" th:action="@{/signup}" method="POST">
-        <div id="success-msg" th:if="${signupSuccess}" class="alert alert-dark">
+        <div id="success-msg" th:if="${signupSuccess}" class="alert alert-success">
             You successfully signed up! Please continue to the <a id="login-link" th:href="@{/login}">login</a> page.
         </div>
         <div id="error-msg" th:if="${signupError}" class="alert alert-danger">
@@ -43,7 +43,11 @@
                 <input type="password" name="password" class="form-control" id="inputPassword" placeholder="Enter Password" maxlength="20" required>
             </div>
             <div class="form-group col-md-6">
-                <label for="inputEmail">Password</label>
+                <label for="inputPassword2">Retype Password</label>
+                <input type="password" name="password2" class="form-control" id="inputPassword2" placeholder="Enter the same Password" maxlength="20" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputEmail">Email</label>
                 <input type="email" name="email" class="form-control" id="inputEmail" placeholder="Enter email" maxlength="30" required>
             </div>
         </div>

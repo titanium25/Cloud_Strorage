@@ -5,10 +5,7 @@ import com.udacity.jwdnd.course1.cloudstorage.models.User;
 import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller()
 @RequestMapping("/signup")
@@ -26,8 +23,15 @@ public class SignupController {
     }
 
     @PostMapping()
-    public String signupUser(@ModelAttribute User user, Model model) {
+    public String signupUser(@ModelAttribute User user,
+                             @RequestParam("password") String pass1,
+                             @RequestParam("password2") String pass2,
+                             Model model) {
         String signupError = null;
+
+        if(!pass1.equals(pass2)) {
+            signupError = "The password are different!";
+        }
 
         if (!userService.isUsernameAvailable(user.getUserName())) {
             signupError = "The username already exists.";
