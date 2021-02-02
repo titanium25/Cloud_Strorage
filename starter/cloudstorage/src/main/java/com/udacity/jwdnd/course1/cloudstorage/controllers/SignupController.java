@@ -6,6 +6,7 @@ import com.udacity.jwdnd.course1.cloudstorage.services.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller()
 @RequestMapping("/signup")
@@ -26,7 +27,8 @@ public class SignupController {
     public String signupUser(@ModelAttribute User user,
                              @RequestParam("password") String pass1,
                              @RequestParam("password2") String pass2,
-                             Model model) {
+                             Model model,
+                             RedirectAttributes redirectAttributes) {
         String signupError = null;
 
         if(!pass1.equals(pass2)) {
@@ -38,14 +40,9 @@ public class SignupController {
         }
 
         if (signupError == null) {
-            int rowsAdded = userService.createUser(user);
-            if (rowsAdded < 0) {
-                signupError = "There was an error signing you up. Please try again.";
-            }
-        }
-
-        if (signupError == null) {
-            model.addAttribute("signupSuccess", true);
+            userService.createUser(user);
+            redirectAttributes.addFlashAttribute("SuccessMessage","Sign Up Successfully");
+            return "redirect:/login";
         } else {
             model.addAttribute("signupError", signupError);
         }

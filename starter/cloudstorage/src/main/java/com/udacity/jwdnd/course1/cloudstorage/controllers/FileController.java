@@ -49,7 +49,6 @@ public class FileController {
             redirectAttributes.addFlashAttribute("isSuccess", true);
             redirectAttributes.addFlashAttribute("errorText", "File " + fileUpload.getOriginalFilename() + " was successfully uploaded");
         }
-
         return "redirect:/result";
     }
 
