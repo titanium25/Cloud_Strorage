@@ -44,3 +44,6 @@
 # ToDo:
 * Test's
 * Contact us page
+* Login page:
+  * Remember me check box
+  * Forgot my password
