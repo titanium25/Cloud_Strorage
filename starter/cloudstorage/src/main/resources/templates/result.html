@@ -15,24 +15,20 @@
 
 <div class="container justify-content-center w-50 p-3" style="margin-top: 5em;">
 
-    <div class="container">
-        <div class="row">
 
-                <div class="alert alert-success fill-parent" th:if="${isSuccess}">
-                    <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
-                        <span class="swal2-success-line-tip"></span>
-                        <span class="swal2-success-line-long"></span>
-                    </div>
-                </div>
-
-
-                <h1 class="display-5">Success</h1>
-                <span th:text="${errorText}"/> <br>
-                Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to
-                continue.
-
+    <div class="alert alert-success fill-parent" th:if="${isSuccess}">
+        <h1 class="display-5">Success</h1>
+        <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+            <span class="swal2-success-line-tip"></span>
+            <span class="swal2-success-line-long"></span>
         </div>
+        <span th:text="${errorText}"/> <br>
+        Click <a th:href="@{'/home?activeTab=' + ${activeTab}}">here</a> to
+        continue.
     </div>
+
+
+
 
 
     <div class="alert alert-danger fill-parent" th:if="${not isSuccess}">
