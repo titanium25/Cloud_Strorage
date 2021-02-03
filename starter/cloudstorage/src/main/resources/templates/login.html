@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/login.css}">
+        <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/bootstrap.min.css}">
+
+        <title>Login</title>
+    </head>
+    <body>
+
+    <div class="wrapper fadeInDown">
+        <div id="formContent">
+            <!-- Tabs Titles -->
+            <div th:if="${SuccessMessage} == 'Sign Up Successfully'" class="alert alert-success">
+                You've successfully signed up!
+            </div>
+            <div th:if="${param.error}" class="alert alert-danger">
+                Invalid username or password
+            </div>
+            <div th:if="${param.logout}" class="alert alert-dark">
+                You have been logged out
+            </div>
+            <!-- Icon -->
+            <div class="fadeIn first">
+                <img src="img/logo/logo.png" id="icon" alt="User Icon" />
+                <h1>Sign in</h1>
+            </div>
+
+            <!-- Login Form -->
+
+            <form action="#" th:action="@{/login}" method="POST">
+                <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
+                <input type="text" id="password" class="fadeIn third" name="password" placeholder="password">
+                <input type="submit" class="fadeIn fourth" value="Log In">
+            </form>
+
+            <!-- Sign Up -->
+            <div id="formFooter">
+                <a id="signup-link" th:href="@{/signup}">Click here to sign up</a>
+            </div>
+
+        </div>
+    </div>
+    </body>
+</html>
