@@ -1,15 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Page Not Found</title>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link media="all" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+
+    <title>Result</title>
 </head>
 <body>
-<h1>There's no page here!</h1>
-<p>
-    We're sorry, the page you are looking for does not exist!
-    Go back to <a href="/home">home page</a>.
-</p>
+<div class="page-wrap d-flex flex-row align-items-center">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-12 text-center">
+                <span class="display-1 d-block">404</span>
+                <div class="mb-4 lead">The page you are looking for was not found.</div>
+                <a href="/home" class="btn btn-link">Back to Home</a>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
-<!--hollygwakamoly-->
