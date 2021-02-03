@@ -15,6 +15,7 @@
   * Cloud storage logo  
   * Username greetings in navBar
   * Logout button
+  * Error page
 * User profile edit page:
   * User can changed they data
   * Data validation
@@ -42,3 +43,4 @@
   
 # ToDo:
 * Test's
+* Contact us page
