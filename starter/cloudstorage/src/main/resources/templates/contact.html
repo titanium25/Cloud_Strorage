@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+
+    <link media="all" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+
+    <title>Contact us</title>
+</head>
+<body class="p-3 mb-2 bg-light text-black">
+
+<div class="container">
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-light mb-3" style="background-color: #cfe2e7;">
+        <div class="container-fluid">
+            <!-- LOGO -->
+            <div>
+                <a class="navbar-brand " href="#">
+                    <img alt="Cloud Storage" class="d-inline-block align-top rounded-circle"
+                         src="/img/logo/favicon.png">
+                    Cloud Storage
+                </a>
+            </div>
+
+            <button aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"
+                    class="navbar-toggler" data-bs-target="#navbarSupportedContent"
+                    data-bs-toggle="collapse" type="button">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a aria-current="page" class="nav-link" href="/home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/profile">My profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="/contact">Contact us</a>
+                    </li>
+                </ul>
+                <div class="navbar-text mr-3">
+                    Hello <span th:text="${user.getUserName()}"/>
+                </div>
+                <div class="navbar-text mr-3">
+                    <form action="#" class="d-flex" method="POST" th:action="@{/logout}">
+                        <button class="btn btn-outline-dark me-2" type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <h2 class="text-center">Contact Form</h2>
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6 pb-5">
+
+
+                <!--Form with header-->
+
+                <form action="mail.php" method="post">
+                    <div class="card border-primary rounded-0">
+                        <div class="card-header p-0">
+                            <div class="bg-info text-white text-center py-2">
+                                <h3><i class="fa fa-envelope"></i> Contactanos</h3>
+                                <p class="m-0">Con gusto te ayudaremos</p>
+                            </div>
+                        </div>
+                        <div class="card-body p-3">
+
+                            <!--Body-->
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fa fa-user text-info"></i></div>
+                                    </div>
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                           placeholder="Your name" required>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fa fa-envelope text-info"></i></div>
+                                    </div>
+                                    <input type="email" class="form-control" id="nombre" name="email"
+                                           placeholder="ejemplo@gmail.com" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="input-group mb-2">
+                                    <div class="input-group-prepend">
+                                        <div class="input-group-text"><i class="fa fa-comment text-info"></i></div>
+                                    </div>
+                                    <textarea class="form-control" placeholder="Your message" required></textarea>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <input type="submit" value="Enviar" class="btn btn-info btn-block rounded-0 py-2">
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+                <!--Form with header-->
+
+
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>
+
+
