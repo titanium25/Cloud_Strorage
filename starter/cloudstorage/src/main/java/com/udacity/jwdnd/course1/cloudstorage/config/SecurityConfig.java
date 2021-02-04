@@ -28,13 +28,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/signup", "/css/**", "/js/**", "/img/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
 
-        http.formLogin()
-                .loginPage("/login")
-                .permitAll();
-
-        http.formLogin()
+        .and().formLogin()
+                .loginPage("/login").permitAll()
+                .loginProcessingUrl("/login")
                 .defaultSuccessUrl("/home", true);
     }
 
