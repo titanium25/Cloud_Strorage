@@ -6,6 +6,7 @@
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
 
     <link media="all" rel="stylesheet" th:href="@{/css/bootstrap.min.css}" type="text/css">
+    <link media="all" rel="stylesheet" th:href="@{/css/input_form.css}" type="text/css">
 
     <title>Edit user profile</title>
 </head>
@@ -53,52 +54,47 @@
         </div>
     </nav>
 
-    <div class="container mt-3 col-md-7">
-        <h2>Edit your profile</h2>
-        <div class="alert alert-success" role="alert" th:if="${profileSuccess}">
-            <span th:text="${profileMessage}"></span>
-        </div>
-        <div class="alert alert-danger" role="alert" th:if="${passwordError}">
-            <span th:text="${passwordErrorText}"></span>
-        </div>
-        <div class="alert alert-danger" role="alert" th:if="${password2Error}">
-            <span th:text="${password2ErrorText}"></span>
+    <div class="container input-form">
+        <div class="profile-image">
+            <img src="img/logo/profile.png" alt="rocket_contact"/>
         </div>
         <form action="#" method="POST" th:action="@{/profile}">
-            <div class="row">
-                <div class="col">
-                    <label class="col-form-label" for="user-name">Username: </label>
-                    <input class="form-control" id="user-name" name="userName" th:value="${user.getUserName()}" type="text">
-                </div>
-                <div class="col">
-                    <label class="col-form-label" for="first-name">Fisrt name: </label>
-                    <input class="form-control" id="first-name" name="firstName" th:value="${user.getFirstName()}" type="text">
-                </div>
+            <h3>Your Profile</h3>
+            <div class="alert alert-success" role="alert" th:if="${profileSuccess}">
+                <span th:text="${profileMessage}"></span>
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${passwordError}">
+                <span th:text="${passwordErrorText}"></span>
+            </div>
+            <div class="alert alert-danger" role="alert" th:if="${password2Error}">
+                <span th:text="${password2ErrorText}"></span>
             </div>
             <div class="row">
-                <div class="col">
-                    <label class="col-form-label" for="password">New password: </label>
-                    <input class="form-control" id="password" name="password" type="password">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="userName" class="form-control" th:value="${user.getUserName()}" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="password" class="form-control" placeholder="Your password" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="confPass" class="form-control" placeholder="Retype new password" value="" />
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" name="btnSubmit" class="btnContact" value="Submit" />
+                    </div>
                 </div>
-                <div class="col">
-                    <label class="col-form-label" for="last-name">Last name: </label>
-                    <input class="form-control" id="last-name" name="lastName"  th:value="${user.getLastName()}" type="text">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <input type="text" name="firstName" class="form-control" th:value="${user.getFirstName()}" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="lastName" class="form-control" th:value="${user.getLastName()}" />
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="email" class="form-control" th:value="${user.getEmail()}" />
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col col-md-6">
-                    <label class="col-form-label" for="conf-pass">Confirm new password: </label>
-                    <input class="form-control" id="conf-pass" name="confPass" type="password">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col mb-3 col-md-6">
-                    <label class="col-form-label" for="email">Email: </label>
-                    <input class="form-control" id="email" name="email" th:value="${user.getEmail()}" type="email">
-                </div>
-            </div>
-            <div class="row col-md-6">
-                <button class="btn btn-primary" type="submit">Confirm</button>
             </div>
         </form>
     </div>
