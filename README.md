@@ -13,6 +13,7 @@
   * Redirect to current tab
   * Navigation menu
   * Cloud storage logo  
+  * Contact us page
   * Username greetings in navBar
   * Logout button
   * Error page
@@ -43,7 +44,8 @@
   
 # ToDo:
 * Test's
-* Contact us page
+* Registration page:
+  * Email validation
 * Login page:
   * Remember me check box
   * Forgot my password
