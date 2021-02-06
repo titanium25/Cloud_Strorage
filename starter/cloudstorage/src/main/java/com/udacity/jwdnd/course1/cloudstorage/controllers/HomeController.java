@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -57,12 +58,5 @@ public class HomeController {
     public String getResult(){
         return "result";
     }
-
-
-    @GetMapping("/logout")
-    public String logoutView() {
-        return "redirect:/login?logout";
-    }
-
 
 }

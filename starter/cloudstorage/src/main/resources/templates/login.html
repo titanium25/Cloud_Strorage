@@ -14,23 +14,22 @@
     <div class="wrapper fadeInDown">
         <div id="formContent">
             <!-- Tabs Titles -->
-            <div th:if="${SuccessMessage} == 'Sign Up Successfully'" class="alert alert-success">
+            <div th:if="${SuccessMessage} == 'Sign Up Successfully'" id="Success-msg" class="alert alert-success">
                 You've successfully signed up!
             </div>
-            <div th:if="${param.error}" class="alert alert-danger">
+            <div th:if="${param.error}" id="Invalid-msg" class="alert alert-danger">
                 Invalid username or password
             </div>
-            <div th:if="${param.logout}" class="alert alert-dark">
+            <div th:if="${param.logout}" id="Logout-msg" class="alert alert-dark">
                 You have been logged out
             </div>
             <!-- Icon -->
             <div class="fadeIn first">
-                <img src="img/logo/logo.png" id="icon" alt="User Icon" />
+                <img src="img/logo/logo.png" id="icon"/>
                 <h1>Sign in</h1>
             </div>
 
             <!-- Login Form -->
-
             <form action="#" th:action="@{/login}" method="POST">
                 <input type="text" id="login" class="fadeIn second" name="username" placeholder="username">
                 <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">

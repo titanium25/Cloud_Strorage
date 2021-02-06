@@ -1,4 +1,4 @@
-package com.udacity.jwdnd.course1.cloudstorage;
+package com.udacity.jwdnd.course1.cloudstorage.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +16,15 @@ public class LoginPage {
     @FindBy(id = "submit-button")
     private WebElement submitButton;
 
+    @FindBy(id = "Success-msg")
+    private WebElement successMsg;
+
+    @FindBy(id = "Invalid-msg")
+    private WebElement invalidUserNameMsg;
+
+    @FindBy(id = "Logout-msg")
+    private WebElement logoutMsg;
+
     public LoginPage(WebDriver webDriver) {
         PageFactory.initElements(webDriver, this);
     }
@@ -24,6 +33,14 @@ public class LoginPage {
         this.usernameField.sendKeys(username);
         this.passwordField.sendKeys(password);
         this.submitButton.click();
+    }
+
+    public boolean isInvalid() {
+        return this.invalidUserNameMsg.isDisplayed();
+    }
+
+    public boolean isLoggedOut() {
+        return logoutMsg.isDisplayed();
     }
 
 }

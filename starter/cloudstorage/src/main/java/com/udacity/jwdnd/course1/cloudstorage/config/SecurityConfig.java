@@ -27,20 +27,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/signup", "/css/**", "/js/**", "/img/**").permitAll()
+                .antMatchers("/signup", "/login", "/css/**", "/js/**", "/img/**", "/h2/**").permitAll()
                 .anyRequest().authenticated()
 
         .and().formLogin()
                 .loginPage("/login").permitAll()
                 .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/home", true);
-    }
+                .defaultSuccessUrl("/home", true)
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/h2/**");
+        .and().logout().logoutSuccessUrl("/login?logout");
     }
 
 }
