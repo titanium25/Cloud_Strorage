@@ -57,8 +57,8 @@ class AuthorizationTests {
         // Go to signup page
         driver.get(baseURL + "/signup");
         signupPage = new SignupPage(driver);
+        assertEquals("Sign Up", driver.getTitle());
         signupPage.signup(firstName, lastName, username, password, password2, email);
-//        assertEquals("Sign Up", driver.getTitle());
 
         // Go to login page
         driver.get(baseURL + "/login");

@@ -40,7 +40,7 @@ public class LoginPage {
     }
 
     public boolean isLoggedOut() {
-        return logoutMsg.isDisplayed();
+        return this.logoutMsg.isEnabled();
     }
 
 }
