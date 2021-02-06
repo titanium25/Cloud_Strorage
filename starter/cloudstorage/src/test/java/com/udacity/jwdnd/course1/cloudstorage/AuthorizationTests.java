@@ -1,6 +1,6 @@
 package com.udacity.jwdnd.course1.cloudstorage;
 
-import com.udacity.jwdnd.course1.cloudstorage.pages.HomePage;
+import com.udacity.jwdnd.course1.cloudstorage.pages.NotePage;
 import com.udacity.jwdnd.course1.cloudstorage.pages.LoginPage;
 import com.udacity.jwdnd.course1.cloudstorage.pages.SignupPage;
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -27,14 +27,13 @@ class AuthorizationTests {
     private static WebDriver driver;
     private SignupPage signupPage;
     private LoginPage loginPage;
-    private HomePage homePage;
+    private NotePage notePage;
     private String baseURL;
 
     private String firstName = "Zori";
     private String lastName = "Dahan";
     private String username = "User_1";
     private String password = "123";
-    private String password2 = "123";
     private String email = "mail@gmail.com";
 
     // before all test, initialize Driver as Chrome browser:
@@ -73,7 +72,7 @@ class AuthorizationTests {
         // call .signup() to simulate user's signup:
         signupPage = new SignupPage(driver);
         assertEquals("Sign Up", driver.getTitle());
-        signupPage.signup(firstName, lastName, username, password, password2, email);
+        signupPage.signup(firstName, lastName, username, password, password, email);
 
         // after signup, navigate to /login:
         driver.get(baseURL + "/login");
@@ -90,10 +89,10 @@ class AuthorizationTests {
 
         // after successfully login, auto navigate to /home:
         // initialize object for HomePage
-        homePage = new HomePage(driver);
+        notePage = new NotePage(driver);
 
         // simulate user to click logout to be logged out:
-        homePage.logout();
+        notePage.logout();
 
         // check if the "You have been logged out" message displayed after logout:
         assertTrue(loginPage.isLoggedOut());
@@ -115,7 +114,7 @@ class AuthorizationTests {
         driver.get(baseURL + "/signup");
         // initialize object for SignupPage:
         signupPage = new SignupPage(driver);
-        signupPage.signup(firstName, lastName, username, password + "wrong_password", password2, email);
+        signupPage.signup(firstName, lastName, username, password + "wrong_password", password , email);
 
         // check the title of the current page is Signup
         assertEquals("Sign Up", driver.getTitle());

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-public class HomePage {
+public class NotePage {
     /** define fields */
     // logout:
     @FindBy(id = "logout")
@@ -34,20 +34,20 @@ public class HomePage {
     @FindBy(id = "add-note-btn")
     private WebElement addNoteBtn;
 
-    @FindBy(id = "note-savechanges-btn")
+    @FindBy(id = "note-save-changes-btn")
     private WebElement submitBtn;
 
-    @FindBy(id = "note-editBtn")
+    @FindBy(id = "note-edit-btn")
     private WebElement editNoteBtn;
 
-    @FindBy(id = "note-deleteBtn")
+    @FindBy(id = "note-delete-btn")
     private WebElement deleteNoteBtn;
 
     // driver:
     private final WebDriver driver;
 
     // constructor:
-    public HomePage(WebDriver driver) {
+    public NotePage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
@@ -82,6 +82,8 @@ public class HomePage {
 
         // click on "Save Changes" to submit:
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.submitBtn);
+
+
     }
 
     // verify that new note title is created:
