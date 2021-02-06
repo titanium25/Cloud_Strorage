@@ -36,7 +36,7 @@ public class LoginPage {
     }
 
     public boolean isInvalid() {
-        return this.invalidUserNameMsg.isDisplayed();
+        return this.invalidUserNameMsg.isEnabled();
     }
 
     public boolean isLoggedOut() {
