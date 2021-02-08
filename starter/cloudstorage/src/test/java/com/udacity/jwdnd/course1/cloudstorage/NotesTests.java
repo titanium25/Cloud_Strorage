@@ -9,6 +9,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -17,6 +18,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class NotesTests {
@@ -117,11 +119,40 @@ public class NotesTests {
         // navigate back to /home by click on "Here" link:
         resultPage.clickHereBtn();
 
+
         notePage.clickEditBtn();
         notePage.fillNoteData("New Test Title", "New Test Description");
         resultPage.clickHereBtn();
         assertEquals("New Test Title", notePage.getNoteTitleText());
         assertEquals("New Test Description", notePage.getNoteDescriptionText());
 
+    }
+
+    /**
+     * Write a test that deletes a note and verifies that the note is no longer displayed.
+     */
+
+    @Test
+    public void noteDeleteTest() {
+        // simulate user to click "Add/Edit a Note" button to add new note:
+        notePage.clickAddNoteBtn();
+        // fill in data to add a new note:
+        notePage.fillNoteData("Test Title", "Test Description");
+
+        // after successfully added new note, navigate to Result page:
+        // initialize new Result page object:
+        resultPage = new ResultPage(driver);
+        // navigate back to /home by click on "Here" link:
+        resultPage.clickHereBtn();
+
+        notePage.clickDeleteBtn();
+        resultPage.clickHereBtn();
+
+        // test there should be no note data on homepage:
+        // use assertThrows() with NoSuchElementException.class to test data does not exist:
+
+        assertThrows(NoSuchElementException.class, () -> {
+            notePage.getNoteTitleText();
+        });
     }
 }
