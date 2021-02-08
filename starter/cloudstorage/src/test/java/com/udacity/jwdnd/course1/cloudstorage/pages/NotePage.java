@@ -59,7 +59,7 @@ public class NotePage {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.noteTab);
     }
 
-    // method to click on Add/Edit button:
+    // method to click on Add button:
     public void clickAddNoteBtn() {
         ((JavascriptExecutor) driver).executeScript("arguments[0].click();", this.addNoteBtn);
     }
