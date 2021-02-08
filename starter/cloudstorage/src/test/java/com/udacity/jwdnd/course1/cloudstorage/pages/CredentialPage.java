@@ -9,9 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 
 // define Page Object for each web element of Credential tab:
 public class CredentialPage {
-    /**
-     * define fields
-     */
+
     // logout:
     @FindBy(xpath = "//*[@id='logoutDiv']//button")
     private WebElement logoutBtn;

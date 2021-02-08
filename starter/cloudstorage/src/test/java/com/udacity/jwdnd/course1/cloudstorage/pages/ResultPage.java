@@ -9,7 +9,7 @@ import org.openqa.selenium.support.PageFactory;
 public class ResultPage {
 
     // fields:
-    @FindBy(tagName = "a")
+    @FindBy(partialLinkText = "here")
     private WebElement backHomeLink;
 
     private final WebDriver driver;

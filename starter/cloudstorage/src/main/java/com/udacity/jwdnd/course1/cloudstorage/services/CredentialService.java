@@ -19,6 +19,9 @@ public class CredentialService {
         return credentialMapper.insert(credential);
     }
 
+    public Credential getByCredentialId(Integer credentialId) {
+        return credentialMapper.getByCredentialId(credentialId);
+    }
     public List<Credential> getAllByUserId(Integer userId) {
         return credentialMapper.getAllByUserId(userId);
     }
