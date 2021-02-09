@@ -20,9 +20,8 @@ import java.io.IOException;
 @RequestMapping("/file")
 public class FileController {
 
-
-    private final FileService fileService;
     private final UserService userService;
+    private final FileService fileService;
 
     public FileController(FileService fileService, UserService userService) {
         this.fileService = fileService;

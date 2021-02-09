@@ -12,8 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Controller
 @RequestMapping("/note")
 public class NoteController {
-    private final NoteService noteService;
+
     private final UserService userService;
+    private final NoteService noteService;
 
     public NoteController(NoteService noteService, UserService userService) {
         this.noteService = noteService;
