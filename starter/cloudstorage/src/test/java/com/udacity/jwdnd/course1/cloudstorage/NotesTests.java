@@ -108,16 +108,16 @@ public class NotesTests {
 
     @Test
     public void noteEditTest() {
-        // simulate user to click "Add/Edit a Note" button to add new note:
-        notePage.clickAddNoteBtn();
-        // fill in data to add a new note:
-        notePage.fillNoteData("Test Title", "Test Description");
-
-        // after successfully added new note, navigate to Result page:
-        // initialize new Result page object:
-        resultPage = new ResultPage(driver);
-        // navigate back to /home by click on "Here" link:
-        resultPage.clickHereBtn();
+//        // simulate user to click "Add/Edit a Note" button to add new note:
+//        notePage.clickAddNoteBtn();
+//        // fill in data to add a new note:
+//        notePage.fillNoteData("Test Title", "Test Description");
+//
+//        // after successfully added new note, navigate to Result page:
+//        // initialize new Result page object:
+//        resultPage = new ResultPage(driver);
+//        // navigate back to /home by click on "Here" link:
+//        resultPage.clickHereBtn();
 
 
         notePage.clickEditBtn();
