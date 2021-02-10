@@ -14,6 +14,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.web.server.LocalServerPort;
 
@@ -31,7 +32,9 @@ public class CredentialTests {
     // fields:
     private static WebDriver driver;
     private CredentialPage credentialPage;
+    @Autowired
     private CredentialService credentialService;
+    @Autowired
     private EncryptionService encryptionService;
     private ResultPage resultPage;
     private String baseURL;
@@ -84,7 +87,9 @@ public class CredentialTests {
     }
 
     /**
-     * Write a test that creates a set of credentials, verifies that they are displayed, and verifies that the displayed password is encrypted.
+     * Write a test that creates a set of credentials,
+     * verifies that they are displayed,
+     * and verifies that the displayed password is encrypted.
      */
     @Test
     public void credentialCreateTest() {
@@ -92,14 +97,40 @@ public class CredentialTests {
         credentialPage.fillCredentialData(url,username,password);
         resultPage = new ResultPage(driver);
         resultPage.clickHereBtn();
-//        credentialPage.clickCredTab();
         assertEquals("Home", driver.getTitle());
         // initialize Credential object:
         // since this is a test, just get the very first value of data displayed on screen:
-//        Credential credential = this.credentialService.getByCredentialId(1);
-//        assertEquals(url, credentialPage.getUrlText());
-//        assertEquals(username, credentialPage.getUsernameText());
-//        assertEquals(password, credentialPage.getPasswordText());
-        // https://github.com/ploratran/SuperDuperDrive/blob/2e4826bbbc4bcc659cafb73be8de01f1c4bb6c14/src/test/java/com/udacity/jwdnd/course1/cloudstorage/CredentialTests.java
+        Credential credential = this.credentialService.getByCredentialId(1);
+        assertEquals(url, credentialPage.getUrlText());
+        assertEquals(username, credentialPage.getUsernameText());
+        assertEquals(encryptionService.encryptValue(password,credential.getKey()), credentialPage.getPasswordText());
+    }
+
+    /**
+     * Write a test that views an existing set of credentials,
+     * verifies that the viewable password is unencrypted,
+     * edits the credentials,
+     * and verifies that the changes are displayed.
+     */
+    @Test
+    public void credentialEditTest() {
+        credentialPage.clickAddCredBtn();
+        credentialPage.fillCredentialData(url,username,password);
+        resultPage = new ResultPage(driver);
+        resultPage.clickHereBtn();
+        assertEquals("Home", driver.getTitle());
+
+        credentialPage.clickEditBtn();
+
+        credentialPage.fillCredentialData(url + "_test", username + "_test", password + "_test");
+
+        resultPage.clickHereBtn();
+        assertEquals("Home", driver.getTitle());
+        // initialize Credential object:
+        // since this is a test, just get the very first value of data displayed on screen:
+        Credential credential = this.credentialService.getByCredentialId(1);
+        assertEquals(url + "_test", credentialPage.getUrlText());
+        assertEquals(username + "_test", credentialPage.getUsernameText());
+        assertEquals(encryptionService.encryptValue(password + "_test",credential.getKey()), credentialPage.getPasswordText());
     }
 }

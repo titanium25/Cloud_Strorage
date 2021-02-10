@@ -26,7 +26,7 @@ public class CredentialPage {
     private WebElement credentialUrlText;
 
     // username field:
-    @FindBy(id = "credential-username")
+    @FindBy(id = "credential-userName")
     private WebElement credentialUsername;
 
     @FindBy(xpath = "//*[@id='credUsernameText']")

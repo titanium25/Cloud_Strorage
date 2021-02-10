@@ -37,6 +37,10 @@ public class CredentialService {
         return credentialMapper.insert(credential);
     }
 
+    public Credential getByCredentialId(Integer credentialId) {
+        return credentialMapper.getByCredentialId(credentialId);
+    }
+
     public List<Credential> getAllByUserId(Integer userId) {
         return credentialMapper.getAllByUserId(userId);
     }
@@ -46,6 +50,19 @@ public class CredentialService {
     }
 
     public int updateCredential(Credential credential) {
+        // encrypt password when user adds new credential before store to DB:
+        SecureRandom random = new SecureRandom();
+        byte[] key = new byte[16];
+        random.nextBytes(key);
+        String encodedKey = Base64.getEncoder().encodeToString(key);
+
+        // set new encoded key and encrypted password to Credential Class Model:
+        credential.setKey(encodedKey);
+
+        // set encrypted password to Credential Class Model:
+        String encryptedPassword = this.encryptionService.encryptValue(credential.getPassword(), credential.getKey());
+        credential.setPassword(encryptedPassword);
+
         return credentialMapper.updateCredential(credential);
     }
 }

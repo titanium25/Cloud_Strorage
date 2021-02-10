@@ -8,6 +8,7 @@ import java.util.List;
 @Mapper
 public interface CredentialMapper {
 
+    String getByCredentialId = "SELECT * FROM CREDENTIALS WHERE credentialId = #{credentialId}";
     String getAllByUserId = "SELECT * FROM CREDENTIALS WHERE userId = #{userId}";
     String insert = "INSERT INTO CREDENTIALS (url, userName, key, password, userId) VALUES(#{url}, #{userName}, #{key}, #{password}, #{userId})";
     String deleteByCredentialId = "DELETE FROM CREDENTIALS WHERE credentialId = #{credentialId}";
@@ -16,6 +17,9 @@ public interface CredentialMapper {
     // show all credentials in home page
     @Select(getAllByUserId)
     List<Credential> getAllByUserId(Integer userId);
+
+    @Select(getByCredentialId)
+    Credential getByCredentialId(Integer credentialId);
 
     @Insert(insert)
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
