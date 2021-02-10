@@ -12,6 +12,7 @@ import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import org.springframework.boot.web.server.LocalServerPort;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class CredentialTests {
@@ -119,11 +121,8 @@ public class CredentialTests {
         resultPage = new ResultPage(driver);
         resultPage.clickHereBtn();
         assertEquals("Home", driver.getTitle());
-
         credentialPage.clickEditBtn();
-
         credentialPage.fillCredentialData(url + "_test", username + "_test", password + "_test");
-
         resultPage.clickHereBtn();
         assertEquals("Home", driver.getTitle());
         // initialize Credential object:
@@ -132,5 +131,22 @@ public class CredentialTests {
         assertEquals(url + "_test", credentialPage.getUrlText());
         assertEquals(username + "_test", credentialPage.getUsernameText());
         assertEquals(encryptionService.encryptValue(password + "_test",credential.getKey()), credentialPage.getPasswordText());
+    }
+
+    /**
+     * Write a test that deletes an existing set of credentials
+     * and verifies that the credentials are no longer displayed
+     */
+    @Test
+    public void credentialDeleteTest() {
+        credentialPage.clickAddCredBtn();
+        credentialPage.fillCredentialData(url,username,password);
+        resultPage = new ResultPage(driver);
+        resultPage.clickHereBtn();
+        assertEquals("Home", driver.getTitle());
+        credentialPage.clickDeleteBtn();
+        // use assertThrows() with NoSuchElementException.class to test data does not exist:
+        assertThrows(NoSuchElementException.class, () -> {
+            credentialPage.getUsernameText();});
     }
 }
